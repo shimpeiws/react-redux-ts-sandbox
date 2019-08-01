@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/Index.tsx',
   output: {
-    filename: './bundle.js'
+    filename: './js/bundle.js'
   },
 
   devtool: 'source-map',

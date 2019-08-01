@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/Index.tsx',
   output: {
-    filename: './bundle.js'
+    filename: './js/bundle.js'
   },
 
   devtool: 'source-map',
@@ -17,5 +19,13 @@ module.exports = {
         use: [{ loader: 'ts-loader' }]
       }
     ]
+  },
+
+  devServer: {
+    open: true,
+    openPage: 'index.html',
+    contentBase: path.join(__dirname, './dist'),
+    watchContentBase: true,
+    port: 3000
   }
 };
