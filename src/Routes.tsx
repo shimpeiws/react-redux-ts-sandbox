@@ -15,9 +15,6 @@ export class Routes extends React.Component<{}, {}> {
         <li>
           <Link to="/counter">Counter</Link>
         </li>
-        <li>
-          <Link to="/page" />
-        </li>
         <Switch>
           <Route exact path="/counter" component={Counter} />
           <Route component={NotFound} />
