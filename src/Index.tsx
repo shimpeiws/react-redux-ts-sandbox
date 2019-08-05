@@ -1,14 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Hello from './Hello';
-import Counter from './counter/Container';
 import store from './store';
 import { Provider } from 'react-redux';
+import { Routes } from './Routes';
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Hello content="hello world" />
-    <Counter />
+    <HashRouter>
+      <Routes />
+    </HashRouter>
   </Provider>,
   document.getElementById('app')
 );
