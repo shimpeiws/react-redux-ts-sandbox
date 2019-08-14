@@ -3,7 +3,9 @@ import { Action } from 'redux';
 
 enum ActionNames {
   INC = 'counter/increment',
-  DEC = 'counter/decrement'
+  DEC = 'counter/decrement',
+  FETCH_REQUEST_START = 'counter/fetch_request_start',
+  FETCH_REQUEST_FINISH = 'counter/fetch_request_finish'
 }
 
 interface IncrementAction extends Action {
@@ -23,6 +25,22 @@ interface DecrementAction extends Action {
 export const decrementAmount = (amount: number): DecrementAction => ({
   type: ActionNames.DEC,
   minusAmount: amount
+});
+
+interface FetchRequestStartAction extends Action {
+  type: ActionNames.FETCH_REQUEST_START;
+}
+
+export const fetchRequestStart = (): FetchRequestStartAction => ({
+  type: ActionNames.FETCH_REQUEST_START
+});
+
+interface FetchRequestFinishAction extends Action {
+  type: ActionNames.FETCH_REQUEST_FINISH;
+}
+
+export const fetchRequestFinish = (): FetchRequestFinishAction => ({
+  type: ActionNames.FETCH_REQUEST_FINISH
 });
 
 export interface CounterState {
