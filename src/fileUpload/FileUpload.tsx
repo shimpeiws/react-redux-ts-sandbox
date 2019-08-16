@@ -21,6 +21,12 @@ export class FileUpload extends React.Component<Props, {}> {
   }
   handleChangeFileBase64(e: any) {
     console.info('e.target', e.target.files.item(0));
+    console.info('e.target', e.target.files.item(0));
+    const file: File = e.target.files.item(0);
+    this.props.actions.openBase64(file);
+  }
+  handleUploadFileBase64(base64Image: string) {
+    this.props.actions.uploadBase64(base64Image);
   }
   render() {
     return (
@@ -33,6 +39,9 @@ export class FileUpload extends React.Component<Props, {}> {
         <div>
           <p>Base 64</p>
           <input type="file" onChange={e => this.handleChangeFileBase64(e)} />
+          <button onClick={() => this.handleUploadFileBase64(this.props.value.base64Image)}>
+            upload
+          </button>
         </div>
       </div>
     );
