@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as bodyParser from 'body-parser';
 import { S3 } from 'aws-sdk';
 import * as multer from 'multer';
@@ -30,6 +30,12 @@ app.use(
 );
 
 app.use(bodyParser.json());
+
+app.use((_: Request, res: Response, next: NextFunction) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 const uploadDirectory = path.join(__dirname, 'upload');
 

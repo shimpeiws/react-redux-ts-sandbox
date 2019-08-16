@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Switch } from 'react-router';
 import { Link, Route } from 'react-router-dom';
 import Counter from './counter/Container';
+import FileUpload from './fileUpload/Container';
 import NotFound from './NotFound';
 
 export class Routes extends React.Component<{}, {}> {
@@ -15,8 +16,12 @@ export class Routes extends React.Component<{}, {}> {
         <li>
           <Link to="/counter">Counter</Link>
         </li>
+        <li>
+          <Link to="/file-upload">FileUpload</Link>
+        </li>
         <Switch>
           <Route exact path="/counter" component={Counter} />
+          <Route exact path="/file-upload" component={FileUpload} />
           <Route component={NotFound} />
         </Switch>
       </div>
