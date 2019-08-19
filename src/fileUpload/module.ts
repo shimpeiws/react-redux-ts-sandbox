@@ -4,7 +4,8 @@ enum ActionNames {
   OPEN = 'fileUpload/open',
   OPEN_BASE64 = 'fileUpload/openBase64',
   UPLOAD = 'fileUpload/upload',
-  SET_FILE_UUID = 'fileUpload/setFileUUID'
+  OPEN_FILE_WITH_SIGNED_URL = 'fileUpload/openFileWithSignedUrl',
+  SET_PRESIGNED_URL = 'fileUpload/setPresignedUrl'
 }
 
 interface OpenAction extends Action {
@@ -33,25 +34,46 @@ export const upload = (): UploadAction => ({
   type: ActionNames.UPLOAD
 });
 
-interface SetFileUUID extends Action {
-  type: ActionNames.SET_FILE_UUID;
-  uuid: string;
+interface OpenFileWithSignedUrl extends Action {
+  type: ActionNames.OPEN_FILE_WITH_SIGNED_URL;
+  fileWithSignedUrl: File;
 }
 
-export const setFileUUID = (uuid: string): SetFileUUID => ({
-  type: ActionNames.SET_FILE_UUID,
-  uuid
+export const openFileWithSignedUrl = (file: File): OpenFileWithSignedUrl => ({
+  type: ActionNames.OPEN_FILE_WITH_SIGNED_URL,
+  fileWithSignedUrl: file
+});
+
+interface SetPresignedUrl extends Action {
+  type: ActionNames.SET_PRESIGNED_URL;
+  presignedUrl: string;
+}
+
+export const setPresignedUrl = (url: string): SetPresignedUrl => ({
+  type: ActionNames.SET_PRESIGNED_URL,
+  presignedUrl: url
 });
 
 export interface FileUploadState {
   base64Image: string;
   file: File | null;
-  uuid: string;
+  fileWithSignedUrl: File | null;
+  preSignedUrl: string;
 }
 
-export type FileUploadActions = OpenAction | UploadAction | OpenBase64Action | SetFileUUID;
+export type FileUploadActions =
+  | OpenAction
+  | UploadAction
+  | OpenBase64Action
+  | OpenFileWithSignedUrl
+  | SetPresignedUrl;
 
-const initialState: FileUploadState = { base64Image: '', file: null, uuid: '' };
+const initialState: FileUploadState = {
+  base64Image: '',
+  file: null,
+  fileWithSignedUrl: null,
+  preSignedUrl: ''
+};
 
 export default function reducer(
   state: FileUploadState = initialState,
@@ -64,8 +86,10 @@ export default function reducer(
       return { ...state, base64Image: action.file };
     case ActionNames.UPLOAD:
       return state;
-    case ActionNames.SET_FILE_UUID:
-      return { ...state, uuid: action.uuid };
+    case ActionNames.OPEN_FILE_WITH_SIGNED_URL:
+      return { ...state, fileWithSignedUrl: action.fileWithSignedUrl };
+    case ActionNames.SET_PRESIGNED_URL:
+      return { ...state, preSignedUrl: action.presignedUrl };
     default:
       return state;
   }
