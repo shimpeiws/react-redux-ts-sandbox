@@ -72,6 +72,19 @@ export class ActionDispatcher {
       console.info('getSignedUrl failed: ', e);
     }
   }
+
+  public async uploadFileWithSignedUrl(file: File, signedUrl: string): Promise<void> {
+    try {
+      const options = {
+        headers: { 'Content-Type': 'image/png' }
+      };
+      console.info('upload', signedUrl);
+      const response = await axios.put(signedUrl, file, options);
+      console.info('uploadFileWithSignedUrl succeed: ', response);
+    } catch (e) {
+      console.info('uploadFileWithSignedUrl failed: ', e);
+    }
+  }
 }
 
 export default connect(

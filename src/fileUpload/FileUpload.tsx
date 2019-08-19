@@ -31,7 +31,13 @@ export class FileUpload extends React.Component<Props, {}> {
     console.info('e.target', e.target.files.item(0));
     this.props.actions.getSignedUrl(e.target.files.item(0));
   }
-  handleUploadFileWithSignedUrl(url: string) {
+  handleUploadFileWithSignedUrl() {
+    const file = this.props.value.fileWithSignedUrl;
+    if (!file) {
+      return;
+    }
+    const url = this.props.value.preSignedUrl;
+    this.props.actions.uploadFileWithSignedUrl(file, url);
     console.info('handleChangeFileWithSignedUrl', url);
   }
   render() {
@@ -53,9 +59,7 @@ export class FileUpload extends React.Component<Props, {}> {
           <p>SignedUrl</p>
           <p>{this.props.value.preSignedUrl}</p>
           <input type="file" onChange={e => this.handleChangeFileWithSignedUrl(e)} />
-          <button onClick={() => this.handleUploadFileWithSignedUrl(this.props.value.base64Image)}>
-            upload
-          </button>
+          <button onClick={() => this.handleUploadFileWithSignedUrl()}>upload</button>
         </div>
       </div>
     );
