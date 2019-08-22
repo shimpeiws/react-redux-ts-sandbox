@@ -2,8 +2,9 @@ import { FileUpload } from './FileUpload';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ReduxAction, ReduxState } from '../store';
-import { open, openBase64 } from './module';
+import { open, openBase64, openFileWithSignedUrl, setPresignedUrl } from './module';
 import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -51,6 +52,37 @@ export class ActionDispatcher {
       console.info('upload succeed: ', response);
     } catch (e) {
       console.info('upload failed: ', e);
+    }
+  }
+
+  public async getSignedUrl(file: File): Promise<void> {
+    try {
+      const type = file.name.split('.')[1];
+      const uuidKey = uuid();
+      console.info('key', `${uuidKey}.${type}`);
+      const params = {
+        key: `${uuidKey}.${type}`
+      };
+      this.dispatch(openFileWithSignedUrl(file));
+      const response = await axios.post('http://localhost:8080/presigned', params);
+      console.info('getSignedUrl succeed: ', response.data.url);
+      const url = response.data.url;
+      this.dispatch(setPresignedUrl(url));
+    } catch (e) {
+      console.info('getSignedUrl failed: ', e);
+    }
+  }
+
+  public async uploadFileWithSignedUrl(file: File, signedUrl: string): Promise<void> {
+    try {
+      const options = {
+        headers: { 'Content-Type': 'image/png' }
+      };
+      console.info('upload', signedUrl);
+      const response = await axios.put(signedUrl, file, options);
+      console.info('uploadFileWithSignedUrl succeed: ', response);
+    } catch (e) {
+      console.info('uploadFileWithSignedUrl failed: ', e);
     }
   }
 }
