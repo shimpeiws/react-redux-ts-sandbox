@@ -1,7 +1,7 @@
 // ActionCreator
 import { Action } from 'redux';
 
-enum ActionNames {
+export enum ActionNames {
   INC = 'counter/increment',
   DEC = 'counter/decrement',
   FETCH_REQUEST_START = 'counter/fetch_request_start',
@@ -49,7 +49,7 @@ export interface CounterState {
 
 export type CounterActions = IncrementAction | DecrementAction;
 
-const initialState: CounterState = { num: 0 };
+export const initialState: CounterState = { num: 0 };
 
 export default function reducer(
   state: CounterState = initialState,
