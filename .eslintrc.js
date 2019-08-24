@@ -1,5 +1,10 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:jest/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:jest/recommended',
+    'plugin:react/recommended'
+  ],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -7,7 +12,7 @@ module.exports = {
       parserOptions: {
         sourceType: 'module'
       },
-      plugins: ['@typescript-eslint'],
+      plugins: ['@typescript-eslint', 'react'],
       rules: {
         // allow overload
         // see https://github.com/typescript-eslint/typescript-eslint/issues/291
@@ -35,7 +40,10 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 2,
         '@typescript-eslint/no-object-literal-type-assertion': 2,
 
-        'no-console': 'off'
+        'no-console': 'off',
+
+        'react/jsx-no-target-blank': 'error',
+        'react/jsx-uses-react': [1]
       },
       globals: {
         console: false,
@@ -44,7 +52,10 @@ module.exports = {
         setTimeout: false,
         Promise: false,
         __dirname: false,
-        Reflect: false
+        Reflect: false,
+        FileReader: false,
+        ArrayBuffer: false,
+        FormData: false
       },
       settings: {
         node: {

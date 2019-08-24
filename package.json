@@ -8,7 +8,7 @@
     "build:prod": "webpack --config ./webpack.config.prod.js",
     "server": "npx ts-node --project scripts/server/tsconfig.json ./scripts/server/index.ts",
     "test": "npx jest",
-    "lint": "yarn eslint ./src/*/*.ts ./__tests__/*/*.ts"
+    "lint": "yarn eslint ./src/*/*ts ./src/*/*tsx ./__tests__/*/*.ts ./__tests__/*/*.tsx"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +42,7 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-jest": "^22.5.1",
     "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
     "express": "^4.17.1",
     "jest": "^24.9.0",
     "jest-mock-axios": "^3.1.0",
