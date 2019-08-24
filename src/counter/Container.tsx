@@ -1,9 +1,14 @@
-import { Counter } from './Counter';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { decrementAmount, incrementAmount, fetchRequestStart, fetchRequestFinish } from './module';
-import { ReduxAction, ReduxState } from '../store';
-import axios from 'axios';
+import { Counter } from "./Counter";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import {
+  decrementAmount,
+  incrementAmount,
+  fetchRequestStart,
+  fetchRequestFinish
+} from "./module";
+import { ReduxAction, ReduxState } from "../store";
+import axios from "axios";
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -24,9 +29,9 @@ export class ActionDispatcher {
     this.dispatch(fetchRequestStart());
 
     try {
-      const response = await axios.get('https://httpbin.org/get');
+      const response = await axios.get("https://httpbin.org/get");
       if (response.status === 200) {
-        console.info('data', response.data);
+        console.info("data", response.data);
         this.dispatch(incrementAmount(100));
       } else {
         throw new Error(`Exception ${response.status}`);
@@ -41,5 +46,7 @@ export class ActionDispatcher {
 
 export default connect(
   (state: ReduxState) => ({ value: state.counter }),
-  (dispatch: Dispatch<ReduxAction>) => ({ actions: new ActionDispatcher(dispatch) })
+  (dispatch: Dispatch<ReduxAction>) => ({
+    actions: new ActionDispatcher(dispatch)
+  })
 )(Counter);
