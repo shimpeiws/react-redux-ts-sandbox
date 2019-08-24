@@ -1,11 +1,11 @@
 // ActionCreator
-import { Action } from 'redux';
+import { Action } from "redux";
 
 export enum ActionNames {
-  INC = 'counter/increment',
-  DEC = 'counter/decrement',
-  FETCH_REQUEST_START = 'counter/fetch_request_start',
-  FETCH_REQUEST_FINISH = 'counter/fetch_request_finish'
+  INC = "counter/increment",
+  DEC = "counter/decrement",
+  FETCH_REQUEST_START = "counter/fetch_request_start",
+  FETCH_REQUEST_FINISH = "counter/fetch_request_finish"
 }
 
 interface IncrementAction extends Action {

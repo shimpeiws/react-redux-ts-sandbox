@@ -1,11 +1,11 @@
-import { Action } from 'redux';
+import { Action } from "redux";
 
 enum ActionNames {
-  OPEN = 'fileUpload/open',
-  OPEN_BASE64 = 'fileUpload/openBase64',
-  UPLOAD = 'fileUpload/upload',
-  OPEN_FILE_WITH_SIGNED_URL = 'fileUpload/openFileWithSignedUrl',
-  SET_PRESIGNED_URL = 'fileUpload/setPresignedUrl'
+  OPEN = "fileUpload/open",
+  OPEN_BASE64 = "fileUpload/openBase64",
+  UPLOAD = "fileUpload/upload",
+  OPEN_FILE_WITH_SIGNED_URL = "fileUpload/openFileWithSignedUrl",
+  SET_PRESIGNED_URL = "fileUpload/setPresignedUrl"
 }
 
 interface OpenAction extends Action {
@@ -69,10 +69,10 @@ export type FileUploadActions =
   | SetPresignedUrl;
 
 const initialState: FileUploadState = {
-  base64Image: '',
+  base64Image: "",
   file: null,
   fileWithSignedUrl: null,
-  preSignedUrl: ''
+  preSignedUrl: ""
 };
 
 export default function reducer(
