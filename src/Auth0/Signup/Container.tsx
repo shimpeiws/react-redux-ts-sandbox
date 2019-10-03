@@ -13,8 +13,8 @@ export class ActionDispatcher {
 
   public async signup() {
     const auth0 = await createAuth0Client({
-      domain: "high-pine.auth0.com",
-      client_id: "79W2F6QdUcGMe0CA3F8UlY3mKR8Cvm9j"
+      domain: "YOUR-DOMAIN-HERE",
+      client_id: "YOUR-CLIENT-ID-HERE"
     });
     await auth0.loginWithPopup();
     const user = await auth0.getUser();
