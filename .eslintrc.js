@@ -55,7 +55,8 @@ module.exports = {
         Reflect: false,
         FileReader: false,
         ArrayBuffer: false,
-        FormData: false
+        FormData: false,
+        document: false
       },
       settings: {
         node: {

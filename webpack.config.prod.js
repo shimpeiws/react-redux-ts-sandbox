@@ -1,20 +1,20 @@
 module.exports = {
-  entry: './src/Index.tsx',
+  entry: "./src/Index.tsx",
   output: {
-    filename: './js/bundle.js'
+    filename: "./js/bundle.js"
   },
 
-  devtool: 'source-map',
+  devtool: "source-map",
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: [".ts", ".tsx", ".js"]
   },
 
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [{ loader: 'ts-loader' }]
+        use: [{ loader: "ts-loader" }]
       }
     ]
   }
