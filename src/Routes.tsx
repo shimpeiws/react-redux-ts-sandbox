@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Switch } from 'react-router';
-import { Link, Route } from 'react-router-dom';
-import Counter from './counter/Container';
-import FileUpload from './fileUpload/Container';
-import NotFound from './NotFound';
+import * as React from "react";
+import { Switch } from "react-router";
+import { Link, Route } from "react-router-dom";
+import Counter from "./counter/Container";
+import FileUpload from "./fileUpload/Container";
+import NotFound from "./NotFound";
 
 export class Routes extends React.Component<{}, {}> {
   render() {

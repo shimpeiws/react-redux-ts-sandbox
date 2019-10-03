@@ -1,6 +1,9 @@
-import counter, { CounterActions, CounterState } from './counter/module';
-import fileUpload, { FileUploadActions, FileUploadState } from './fileUpload/module';
-import { createStore, combineReducers, Action } from 'redux';
+import counter, { CounterActions, CounterState } from "./counter/module";
+import fileUpload, {
+  FileUploadActions,
+  FileUploadState
+} from "./fileUpload/module";
+import { createStore, combineReducers, Action } from "redux";
 
 export default createStore(
   combineReducers({
