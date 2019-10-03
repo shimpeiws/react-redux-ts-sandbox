@@ -4,6 +4,7 @@ import { Link, Route } from "react-router-dom";
 import Counter from "./counter/Container";
 import FileUpload from "./fileUpload/Container";
 import NotFound from "./NotFound";
+import Signup from "./Auth0/Signup/Container";
 
 export class Routes extends React.Component<{}, {}> {
   render() {
@@ -19,7 +20,11 @@ export class Routes extends React.Component<{}, {}> {
         <li>
           <Link to="/file-upload">FileUpload</Link>
         </li>
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
         <Switch>
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/counter" component={Counter} />
           <Route exact path="/file-upload" component={FileUpload} />
           <Route component={NotFound} />

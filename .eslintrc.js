@@ -43,7 +43,8 @@ module.exports = {
         'no-console': 'off',
 
         'react/jsx-no-target-blank': 'error',
-        'react/jsx-uses-react': [1]
+        'react/jsx-uses-react': [1],
+        'react/prop-types': 0
       },
       globals: {
         console: false,
