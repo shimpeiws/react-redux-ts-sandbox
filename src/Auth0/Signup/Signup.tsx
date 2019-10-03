@@ -1,13 +1,22 @@
 import * as React from "react";
-import createAuth0Client from "@auth0/auth0-spa-js";
+import { SignupState } from "./Module";
+import { ActionDispatcher } from "./Container";
 
-export interface Props {}
+export interface Props {
+  value: SignupState;
+  actions: ActionDispatcher;
+}
 
 export const Signup: React.FC<Props> = props => {
-  console.info("createAuth0Client", createAuth0Client);
+  const handleSignup = () => {
+    props.actions.signup();
+  };
+
   return (
     <div>
       <h2>Signup</h2>
+      {props.value.loading}
+      <button onClick={() => handleSignup()}>signup</button>
     </div>
   );
 };

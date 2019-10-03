@@ -4,7 +4,7 @@ import { Link, Route } from "react-router-dom";
 import Counter from "./counter/Container";
 import FileUpload from "./fileUpload/Container";
 import NotFound from "./NotFound";
-import { Signup } from "./Auth0/Signup/Signup";
+import Signup from "./Auth0/Signup/Container";
 
 export class Routes extends React.Component<{}, {}> {
   render() {
