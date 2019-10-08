@@ -2,7 +2,8 @@ import { Signup } from "./Signup";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ReduxAction, ReduxState } from "../../store";
-import createAuth0Client from "@auth0/auth0-spa-js";
+import { isSignin, loginWithPopup, logout } from "../../lib/Auth0";
+import { requestStart, requestFinish, setSignin } from "./Module";
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -11,14 +12,27 @@ export class ActionDispatcher {
     this.dispatch = dispatch;
   }
 
+  public async init() {
+    this.dispatch(requestStart());
+    try {
+      const r = await isSignin();
+      this.dispatch(setSignin(r));
+    } catch (err) {
+      console.info(err);
+    } finally {
+      this.dispatch(requestFinish());
+    }
+  }
+
   public async signup() {
-    const auth0 = await createAuth0Client({
-      domain: "YOUR-DOMAIN-HERE",
-      client_id: "YOUR-CLIENT-ID-HERE"
-    });
-    await auth0.loginWithPopup();
-    const user = await auth0.getUser();
-    console.log(user);
+    await loginWithPopup();
+    const r = await isSignin();
+    this.dispatch(setSignin(r));
+  }
+
+  public async logout() {
+    await logout();
+    this.dispatch(setSignin(false));
   }
 }
 
