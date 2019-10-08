@@ -2,7 +2,7 @@ import { Signup } from "./Signup";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ReduxAction, ReduxState } from "../../store";
-import createAuth0Client from "@auth0/auth0-spa-js";
+import { client as Auth0Client } from "../../lib/Auth0";
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -12,10 +12,7 @@ export class ActionDispatcher {
   }
 
   public async signup() {
-    const auth0 = await createAuth0Client({
-      domain: "YOUR-DOMAIN-HERE",
-      client_id: "YOUR-CLIENT-ID-HERE"
-    });
+    const auth0 = await Auth0Client();
     await auth0.loginWithPopup();
     const user = await auth0.getUser();
     console.log(user);
