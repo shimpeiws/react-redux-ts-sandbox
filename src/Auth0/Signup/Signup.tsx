@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SignupState } from "./Module";
 import { ActionDispatcher } from "./Container";
-import { client as Auth0Client } from "../../lib/Auth0";
+import { isSignin } from "../../lib/Auth0";
 
 export interface Props {
   value: SignupState;
@@ -13,7 +13,7 @@ export const Signup: React.FC<Props> = props => {
 
   React.useEffect(() => {
     const init = async () => {
-      const r = await isSginIn();
+      const r = await isSignin();
       setSignin(r);
     };
     init();
@@ -23,15 +23,13 @@ export const Signup: React.FC<Props> = props => {
     props.actions.signup();
   };
 
-  const isSginIn = async (): Promise<boolean> => {
-    const client = await Auth0Client();
-    const user = client.getUser();
-    return !!user;
+  const handleLogout = () => {
+    props.actions.logout();
   };
 
   const showSignin = () => {
     if (signin) {
-      return <p>Logout</p>;
+      return <button onClick={() => handleLogout()}>logout</button>;
     }
     return <button onClick={() => handleSignup()}>signup</button>;
   };

@@ -7,3 +7,14 @@ export async function client(): Promise<Auth0Client> {
     client_id: "YOUR-CLIENT-ID-HERE"
   });
 }
+
+export async function isSignin(): Promise<boolean> {
+  const c = await client();
+  const user = await c.getUser();
+  return !!user;
+}
+
+export async function logout() {
+  const c = await client();
+  c.logout();
+}
