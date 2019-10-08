@@ -2,8 +2,8 @@ import { Signup } from "./Signup";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ReduxAction, ReduxState } from "../../store";
-import { client as Auth0Client } from "../../lib/Auth0";
-import { logout } from "../../lib/Auth0";
+import { isSignin, loginWithPopup, logout } from "../../lib/Auth0";
+import { requestStart, requestFinish, setSignin } from "./Module";
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -12,13 +12,27 @@ export class ActionDispatcher {
     this.dispatch = dispatch;
   }
 
+  public async init() {
+    this.dispatch(requestStart());
+    try {
+      const r = await isSignin();
+      this.dispatch(setSignin(r));
+    } catch (err) {
+      console.info(err);
+    } finally {
+      this.dispatch(requestFinish());
+    }
+  }
+
   public async signup() {
-    const auth0 = await Auth0Client();
-    await auth0.loginWithPopup();
+    await loginWithPopup();
+    const r = await isSignin();
+    this.dispatch(setSignin(r));
   }
 
   public async logout() {
     await logout();
+    this.dispatch(setSignin(false));
   }
 }
 
