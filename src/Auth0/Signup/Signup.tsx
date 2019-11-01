@@ -23,6 +23,10 @@ export const Signup: React.FC<Props> = props => {
     props.actions.logout();
   };
 
+  const handlePasswordless = () => {
+    props.actions.passwordless();
+  };
+
   const showSignin = () => {
     if (props.value.signin) {
       return <button onClick={() => handleLogout()}>logout</button>;
@@ -35,6 +39,7 @@ export const Signup: React.FC<Props> = props => {
       <h2>Signup</h2>
       {props.value.loading}
       {showSignin()}
+      <button onClick={() => handlePasswordless()}>passwordless</button>
     </div>
   );
 };
