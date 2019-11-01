@@ -2,7 +2,12 @@ import { Signup } from "./Signup";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ReduxAction, ReduxState } from "../../store";
-import { isSignin, loginWithPopup, logout } from "../../lib/Auth0";
+import {
+  isSignin,
+  loginWithPopup,
+  logout,
+  passwordless
+} from "../../lib/Auth0";
 import { requestStart, requestFinish, setSignin } from "./Module";
 
 export class ActionDispatcher {
@@ -33,6 +38,10 @@ export class ActionDispatcher {
   public async logout() {
     await logout();
     this.dispatch(setSignin(false));
+  }
+
+  public passwordless() {
+    passwordless();
   }
 }
 
