@@ -9,6 +9,7 @@ import {
 } from "./module";
 import { ReduxAction, ReduxState } from "../store";
 import axios from "axios";
+import { push } from "connected-react-router";
 
 export class ActionDispatcher {
   dispatch: (action: any) => any;
@@ -33,6 +34,7 @@ export class ActionDispatcher {
       if (response.status === 200) {
         console.info("data", response.data);
         this.dispatch(incrementAmount(100));
+        this.dispatch(push("/file-upload"));
       } else {
         throw new Error(`Exception ${response.status}`);
       }
